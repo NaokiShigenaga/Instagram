@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -115,13 +116,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.setPostData(postArray[indexPath.row])
         
         //セル内のボタンのアクションをソースコードで設定する
-        cell.likeButton.addTarget(self, action:#selector(handleButton(_:forEvent:)), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action:#selector(handleButton1(_:forEvent:)), for: .touchUpInside)
+        
+        //セル内のコメント用ボタンの設定
+        cell.commentButton.addTarget(self, action:#selector(handleButton2(_:forEvent:)), for: .touchUpInside)
         
         return cell
     }
     
     //セル内のボタンがタップされた時に呼ばれるメソッド
-    @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
+    @objc func handleButton1(_ sender: UIButton, forEvent event: UIEvent) {
         print("DEBUG_PRINT: likeボタンがタップされました。")
         
         //タップされたセルのインデックスを求める
@@ -155,6 +159,54 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             postRef.updateChildValues(likes)
             
         }
+    }
+    
+    //コメントボタン用
+    @objc func handleButton2(_ sender: UIButton, forEvent event: UIEvent) {
+        print("DEBUG_PRINT: コメントボタンがタップされました。")
+        
+        var alertTextField: UITextField?
+        
+        let alert = UIAlertController(
+            title: "コメントをする",
+            message: "",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                //textField.text = self.label1.text
+                // textField.placeholder = "Mike"
+                // textField.isSecureTextEntry = true
+        })
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: UIAlertAction.Style.default) { _ in
+                   //postDataに必要な情報を取得しておく
+                    _ = Auth.auth().currentUser?.displayName
+                    
+                    //辞書を作成してFirebaseに保存する
+                    let postRef = Database.database().reference().child(Const.PostPath)
+                    let postDic = ["comment": UITextField.text]
+                    postRef.childByAutoId().setValue(postDic)
+                    
+                    //HUDで投稿完了を表示する
+                    SVProgressHUD.showSuccess(withStatus: "投稿しました")
+                    
+                    //全てのモーダルを閉じる
+                    UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+                    
+                    
+            }
+        )
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
 }

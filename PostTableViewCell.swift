@@ -16,10 +16,9 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
     
     @IBAction func commentAction(_ sender: Any) {
-        
-        
 
     }
     
@@ -39,6 +38,13 @@ class PostTableViewCell: UITableViewCell {
         self.postImageView.image = postData.image
         
         self.captionLabel.text = "\(postData.name!) : \(postData.caption!)"
+        //self.captionLabel.text = "\(postData.name!) : \(postData.caption!) : \(postData.comment!)"
+        //if postData.caption != ""{
+        //    self.commentLabel.text = "\(postData.comment!)"
+        //}else{
+        //    self.commentLabel.text = ""
+        //}
+        
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
         
