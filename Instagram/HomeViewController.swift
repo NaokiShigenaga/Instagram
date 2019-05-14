@@ -187,20 +187,45 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             UIAlertAction(
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
-                   //postDataに必要な情報を取得しておく
-                    _ = Auth.auth().currentUser?.displayName
                     
-                    //辞書を作成してFirebaseに保存する
-                    let postRef = Database.database().reference().child(Const.PostPath)
-                    let postDic = ["comment": UITextField.text]
-                    postRef.childByAutoId().setValue(postDic)
                     
-                    //HUDで投稿完了を表示する
-                    SVProgressHUD.showSuccess(withStatus: "投稿しました")
+                    print("DEBUG_PRINT: コメントボタンがタップされました。")
                     
-                    //全てのモーダルを閉じる
-                    UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+                    //タップされたセルのインデックスを求める
+                    let touch = event.allTouches?.first
+                    let point = touch!.location(in: self.tableView)
+                    let indexPath = self.tableView.indexPathForRow(at: point)
                     
+                    //配列からタップされたインデックスのデータを取り出す
+                    let postData = self.postArray[indexPath!.row]
+                    
+                    //Firebaseに保存するデータの準備
+                    if let uid = Auth.auth().currentUser?.uid {
+                        if postData.iscomment {
+                            postData.comments.append(uid)
+                        }
+                        
+                        //増えたlikesをFirebaseに保存する
+                        let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
+                        let comments = ["comments": postData.comments]
+                        postRef.updateChildValues(comments)
+                        
+                    }
+                    
+                    
+                    
+                    
+                    let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
+                    
+                    let name = Auth.auth().currentUser?.displayName
+                    if let textField = alertTextField, let text = textField.text {
+                        let comment = "\(name): \(text)"
+                        postData.comments.append(comment)
+                        
+                    }
+                    
+                    let comments = ["comments": postData.comments]
+                    postRef.updateChildValues(comments)
                     
             }
         )

@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     
     @IBAction func commentAction(_ sender: Any) {
-
+        print("コメント処理")
     }
     
     
@@ -38,12 +38,14 @@ class PostTableViewCell: UITableViewCell {
         self.postImageView.image = postData.image
         
         self.captionLabel.text = "\(postData.name!) : \(postData.caption!)"
-        //self.captionLabel.text = "\(postData.name!) : \(postData.caption!) : \(postData.comment!)"
-        //if postData.caption != ""{
-        //    self.commentLabel.text = "\(postData.comment!)"
-        //}else{
-        //    self.commentLabel.text = ""
-        //}
+        
+        //print("postData.comment \(postData.comment)")
+
+        
+        //print("self.commentLabel \(self.commentLabel)")
+
+        
+        self.commentLabel.text = "\(postData.comments)"
         
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
