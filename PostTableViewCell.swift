@@ -45,7 +45,27 @@ class PostTableViewCell: UITableViewCell {
         //print("self.commentLabel \(self.commentLabel)")
 
         
-        self.commentLabel.text = "\(postData.comments)"
+        //self.commentLabel.text = "\(postData.comments)"
+        
+        //print("結果：\(postData.comments)")
+        
+        //print(postData.comments.count)
+
+        
+        //print(postData.comments[0])
+        
+        let num = postData.comments.count
+        var commentMessage = ""
+        
+        //print("結果：\(num)")
+        
+        for i in 0 ..< num {
+            print(postData.comments[i])
+            commentMessage += "\(postData.comments[i])\n"
+        }
+        
+        commentLabel.text = commentMessage
+        
         
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"

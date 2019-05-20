@@ -219,7 +219,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     let name = Auth.auth().currentUser?.displayName
                     if let textField = alertTextField, let text = textField.text {
-                        let comment = "\(name): \(text)"
+                        let comment = "\(name!): \(text)"
                         postData.comments.append(comment)
                         
                     }
