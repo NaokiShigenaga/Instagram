@@ -42,19 +42,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uT-8O-DIE">
-                        <rect key="frame" x="126" y="370" width="141" height="28"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uT-8O-DIE">
+                        <rect key="frame" x="126" y="369.5" width="60" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="cPo-Jg-kbY"/>
+                            <constraint firstAttribute="width" constant="60" id="Wbv-5A-I46"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="コメント"/>
                         <connections>
                             <action selector="commentAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gju-Ff-w0V"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyD-FH-NaX">
-                        <rect key="frame" x="277" y="373.5" width="42" height="21"/>
+                        <rect key="frame" x="196" y="373.5" width="123" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -91,7 +91,6 @@
                     <constraint firstItem="oL2-M2-ev8" firstAttribute="top" secondItem="b9p-BC-F9n" secondAttribute="bottom" constant="10" id="qpF-yP-4OU"/>
                     <constraint firstItem="oL2-M2-ev8" firstAttribute="top" secondItem="DeB-Ge-2Op" secondAttribute="bottom" constant="10" id="roD-tf-FiQ"/>
                     <constraint firstItem="W3D-Ue-UgJ" firstAttribute="leading" secondItem="oL2-M2-ev8" secondAttribute="trailing" constant="10" id="tuj-Ol-xqX"/>
-                    <constraint firstItem="2uT-8O-DIE" firstAttribute="leading" secondItem="W3D-Ue-UgJ" secondAttribute="trailing" constant="10" id="uD7-fa-3cp"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UyD-FH-NaX" secondAttribute="trailing" constant="10" id="xPE-iP-WNB"/>
                 </constraints>
             </tableViewCellContentView>

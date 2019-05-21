@@ -39,25 +39,8 @@ class PostTableViewCell: UITableViewCell {
         
         self.captionLabel.text = "\(postData.name!) : \(postData.caption!)"
         
-        //print("postData.comment \(postData.comment)")
-
-        
-        //print("self.commentLabel \(self.commentLabel)")
-
-        
-        //self.commentLabel.text = "\(postData.comments)"
-        
-        //print("結果：\(postData.comments)")
-        
-        //print(postData.comments.count)
-
-        
-        //print(postData.comments[0])
-        
         let num = postData.comments.count
         var commentMessage = ""
-        
-        //print("結果：\(num)")
         
         for i in 0 ..< num {
             print(postData.comments[i])

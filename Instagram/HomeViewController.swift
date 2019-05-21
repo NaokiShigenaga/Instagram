@@ -174,9 +174,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
                 alertTextField = textField
-                //textField.text = self.label1.text
-                // textField.placeholder = "Mike"
-                // textField.isSecureTextEntry = true
         })
         alert.addAction(
             UIAlertAction(
@@ -188,7 +185,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
                     
-                    
                     print("DEBUG_PRINT: コメントボタンがタップされました。")
                     
                     //タップされたセルのインデックスを求める
@@ -198,22 +194,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     //配列からタップされたインデックスのデータを取り出す
                     let postData = self.postArray[indexPath!.row]
-                    
-                    //Firebaseに保存するデータの準備
-                    if let uid = Auth.auth().currentUser?.uid {
-                        if postData.iscomment {
-                            postData.comments.append(uid)
-                        }
-                        
-                        //増えたlikesをFirebaseに保存する
-                        let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
-                        let comments = ["comments": postData.comments]
-                        postRef.updateChildValues(comments)
-                        
-                    }
-                    
-                    
-                    
+
                     
                     let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
                     

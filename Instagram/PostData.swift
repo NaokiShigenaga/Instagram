@@ -22,7 +22,6 @@ class PostData: NSObject {
     var isLiked: Bool = false
     
     var comments: [String] = []
-    var iscomment: Bool = false
     
     init(snapshot: DataSnapshot, myId: String) {
         self.id = snapshot.key
@@ -56,11 +55,5 @@ class PostData: NSObject {
             self.comments = comments
         }
         
-        for commentId in self.comments {
-            if commentId == myId {
-                self.iscomment = true
-                break
-            }
-        }
     }
 }
